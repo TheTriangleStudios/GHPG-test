@@ -11,12 +11,27 @@
     <ul id="list"></ul>
     <hr/>
     <a href="data.txt">data.txt</a>
+    <h1 id="dataPreview" onclick="preview()">Data preview</h1>
+    <ul id="dataList"></ul>
     <script>
       let list = document.getElementById("list");
+      let dataList = document.getElementById("dataList");
+      let dataPreview = document.getElementById("dataPreview");
       
       ["0", "1", "2", "3", "~", "¤"].forEach(it => {
         list.innerHTML += "<li>" + it + "</li>";
       });
+      
+      function preview() {
+        alert("preview");
+        loadFile("data.txt", datafile => {
+          let datalines = datafile.split("$");
+          datalines.forEach(dataline => {
+            dataList.innerHTML += "<li>" + dataline + "</li>";
+          });
+        });
+        dataPreview.onClick = null;
+      }
     </script>
   </body>
 </html>
