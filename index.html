@@ -24,12 +24,19 @@
       
       function preview() {
         alert("preview");
-        loadFile("data.txt", datafile => {
-          let datalines = datafile.split("$");
-          datalines.forEach(dataline => {
-            dataList.innerHTML += "<li>" + dataline + "</li>";
-          });
-        });
+        var datafile = new XMLHttpRequest();
+        datafile.open("GET", "data.txt", false);
+        datafile.onreadystatechange = function() {
+          if (datafile.readyState == 4) {
+            if (datafile.status == 200 || datafile.status == 0) {
+              let datalines = datafile.responseText.split("$");
+              datalines.forEach(dataline => {
+                dataList.innerHTML += "<li>" + dataline + "</li>";
+              });
+            }
+          }
+        };
+        file.send(null);
         dataPreview.onClick = null;
       }
     </script>
