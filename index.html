@@ -29,7 +29,7 @@
         datafile.onreadystatechange = function() {
           if (datafile.readyState == 4) {
             if (datafile.status == 200 || datafile.status == 0) {
-              let datalines = datafile.responseText.split("$");
+              let datalines = datafile.responseText.split(/\R/g);
               datalines.forEach(dataline => {
                 dataList.innerHTML += "<li>" + dataline + "</li>";
               });
