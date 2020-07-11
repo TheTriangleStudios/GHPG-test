@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TTS SVG</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://thetrianglestudios.github.io/GHPG-conntest/styler.js"></script>
+  </head>
+  <body>
+    <h1>Query test!</h1>
+    <h2 id="qh" onclick="req()">Q:</h2>
+    <ul id="list"></ul>
+    <script>
+      let list = document.getElementById("list");
+      let qh = document.getElementById("qh");
+      
+      if (!location.search) {
+        location.search = prompt("Q?");
+      }
+      let qd = location.search.slice(1);
+      qh.innerHTML += " " + qd;
+      
+      function req() {
+        location.search = prompt("RQ?");
+        list.innerHTML += "<li>" + location.search.slice(1) + "</li>";
+      }
+    </script>
+  </body>
+</html>
