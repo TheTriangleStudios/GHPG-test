@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GHPG-test-conntest</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <h1>Conntest!</h1>
+    <a href="https://thetrianglestudios.github.io/GHPG-conntest/conndata.txt">conndata.txt</a>
+    <h1 id="dataPreview" onclick="preview()">Data preview</h1>
+    <ul id="dataList"></ul>
+    <script>
+      let dataList = document.getElementById("dataList");
+      let dataPreview = document.getElementById("dataPreview");
+      
+      function preview() {
+        alert("preview");
+        var datafile = new XMLHttpRequest();
+        datafile.open("GET", "https://thetrianglestudios.github.io/GHPG-conntest/conndata.txt", false);
+        datafile.onreadystatechange = function() {
+          if (datafile.readyState == 4) {
+            if (datafile.status == 200 || datafile.status == 0) {
+              let datalines = datafile.responseText.split(/\r\n|\n|\r/g).filter(e => e);
+              datalines.forEach(dataline => {
+                dataList.innerHTML += "<li>" + dataline + "</li>";
+              });
+            }
+          }
+        };
+        datafile.send(null);
+        dataPreview.onClick = null;
+      }
+    </script>
+  </body>
+</html>
